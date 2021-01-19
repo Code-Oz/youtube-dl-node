@@ -1,0 +1,37 @@
+## Youtube Downloader from video id or playlist id
+
+*This project is tied to https://github.com/CodeOzz/youtube-dl-front, you need to use both part if you want to use the project. Or you can just use back part and make your own front part.*
+
+As named, this project will help you to download video youtube in .mp4, you can download video from id or directly from playlist youtube.
+
+Don't forget to make your playlist public since we are not using Youtube API we need this in order to fetch video in the playlist.
+
+Some videos are not available to be downloaded, so check another video id for this video.
+
+### Setup
+
+```
+npm install
+```
+
+```
+npm run dev
+```
+
+### Docs
+
+
+```
+GET /video/infos/:id
+````
+Fetch video infos from id like durations, title.
+
+```
+GET /video/:id
+````
+Download video from id as Readable streams. Before handle this operation we fetch more informations like if audio is available, or mp4 format is available. We put a maximum of 10 minutes for video download. Can be change in `src/validators/yt-dl-validator-video.ts`
+
+```
+GET /playlist/:playlistId
+````
+Fetch video infos from playlist id (used to get title, we cannot have other information like durations)
