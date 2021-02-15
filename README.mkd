@@ -18,6 +18,18 @@ npm install
 npm run dev
 ```
 
+/!\ For converting mp3 video, you should install ffmpeg with this
+
+```
+sudo apt-get install ffmpeg
+```
+
+You have to create ENV VARIABLE about path where videos are downloaded.
+
+```
+./convert-mp4-to-mp3
+```
+
 ### Docs
 
 
