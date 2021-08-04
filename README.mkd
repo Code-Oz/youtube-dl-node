@@ -20,11 +20,29 @@ npm run dev
 
 /!\ For converting mp3 video, you should install ffmpeg with this
 
+🐧 On Linux:
+
 ```
 sudo apt-get install ffmpeg
 ```
 
+🍎 On Mac:
+
+```
+brew install ffmpeg
+```
+
 You have to create ENV VARIABLE about path where videos are downloaded.
+
+Go to the path where you want to have your mp3.
+
+```
+pwd
+echo "export DOWNLOAD_PATH=<paste pwd output>" >> ~/.zshrc
+source ~/.zshrc
+```
+
+When you will download video from youtube, you need to add all mp4 file to the folder ($DOWNLOAD_PATH) and execute the script below 👇
 
 ```
 ./convert-mp4-to-mp3
