@@ -1,14 +1,18 @@
 ## Youtube Downloader from video id or playlist id
 
-*This project is tied to https://github.com/CodeOzz/youtube-dl-front, you need to use both part if you want to use the project. Or you can just use back part and make your own front part.*
+_This project is tied to https://github.com/code-oz/youtube-dl-front, you need to use both part if you want to use the project. Or you can just use back part and make your own front part._
 
-As named, this project will help you to download video youtube in .mp4, you can download video from id or directly from playlist youtube.
+As named, this project will help you to download video youtube in .mp4, you can **download video** from **id** or directly from **playlist youtube.**
+
+Files are mp4, but you can transform them into mp3 files (follow the 4 step bellow)
 
 Don't forget to make your playlist public since we are not using Youtube API we need this in order to fetch video in the playlist.
 
 Some videos are not available to be downloaded, so check another video id for this video.
 
 ### Setup
+
+1. 🌾 Prepare the field
 
 ```
 npm install
@@ -17,6 +21,14 @@ npm install
 ```
 npm run dev
 ```
+
+(Do the same for youtube-dl-front)
+
+2. ⚠️ Don't forget to make your playlist public since we are not using Youtube API we need this in order to fetch video in the playlist.
+
+_Some videos are not available to be downloaded, so check another video id for this video._
+
+3. 🛠 Install ffmpeg
 
 /!\ For converting mp3 video, you should install ffmpeg with this
 
@@ -32,6 +44,12 @@ sudo apt-get install ffmpeg
 brew install ffmpeg
 ```
 
+4. 🚩 (Optional) Convert mp4 to mp3 file
+
+Files are mp4, if you need to convert all mp4 files into mp3 files
+
+a) Create `$DOWNLOAD_PATH` environment variable
+
 You have to create ENV VARIABLE about path where videos are downloaded.
 
 Go to the path where you want to have your mp3.
@@ -42,26 +60,40 @@ echo "export DOWNLOAD_PATH=<paste pwd output>" >> ~/.zshrc
 source ~/.zshrc
 ```
 
-When you will download video from youtube, you need to add all mp4 file to the folder ($DOWNLOAD_PATH) and execute the script below 👇
+b) When you will **download video from youtube**, you will need to add all mp4 file to the folder ($DOWNLOAD_PATH) and execute the script below 👇
 
 ```
-./convert-mp4-to-mp3
+./convert-mp4-to-mp3.bash
 ```
+
+c) Finally
+
+Your mp3 files will be available into `$DOWNLOAD_PATH`/mp3Files
+
+**🚑 Troubleshoting:**
+
+- Be careful to correctly put your playlist in public.
+
+- Only video under 10min are available to be downloaded, if you need to change this behavior, change value into `src/validators/yt-dl-validator-video.ts`
+
+- If video is not downloaded, it can be due to **forbidden video from Youtube (find out another video)** or it's because you need to update the version of "ytdl-core", to achieve this `npm install ytdl-core@latest` in this repo.
 
 ### Docs
 
-
 ```
 GET /video/infos/:id
-````
+```
+
 Fetch video infos from id like durations, title.
 
 ```
 GET /video/:id
-````
+```
+
 Download video from id as Readable streams. Before handle this operation we fetch more informations like if audio is available, or mp4 format is available. We put a maximum of 10 minutes for video download. Can be change in `src/validators/yt-dl-validator-video.ts`
 
 ```
 GET /playlist/:playlistId
-````
+```
+
 Fetch video infos from playlist id (used to get title, we cannot have other information like durations)
